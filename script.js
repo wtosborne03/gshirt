@@ -27,7 +27,7 @@ function map() {
     var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
-        center: [oposition.latitude, oposition.longitude],
+        center: [oposition.longitude, oposition.latitude],
         zoom: 13
     });
     geo = new MapboxGeocoder({
