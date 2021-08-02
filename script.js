@@ -44,7 +44,7 @@ function map() {
     map.addControl(geo);
 }
 function go() {
-    rURL = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=' + oposition.latitude + ',' + oposition.longitude + '&destinations=' + eposition[0] + ',' + eposition[1] + '&key=AIzaSyC_-czyGuDPtTLXv8zioFztqAVe9zfAkHg';
+    rURL = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=' + oposition.latitude + ',' + oposition.longitude + '&destinations=' + eposition[1] + ',' + eposition[0] + '&key=AIzaSyC_-czyGuDPtTLXv8zioFztqAVe9zfAkHg';
     fetch(rURL, {mode: 'no-cors'})
     .then(response => response.json())
     .then(data => console.log(data));
