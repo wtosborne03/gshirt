@@ -1,0 +1,74 @@
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+.main {
+  margin: 0 auto;
+  width: 100%;
+}
+
+#map {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.start-button {
+  margin: auto;
+  width: 10em;
+  height: 10em;
+}
+
+.button1 {
+  margin: auto;
+  margin-top: 2em;
+  width: 10em;
+  height: 10em;
+  color: white;
+  background-color: #3498db;
+  border: 5px solid transparent;
+  transition: 0.2s ease;
+  border-radius: 50px;
+}
+.button1:hover {
+  color: #3498db;
+  background-color: white;
+  transform: scale(1.1);
+  border: 5px solid #3498db;
+}
+
+.button-n {
+  margin: auto;
+  color: white;
+  background-color: #3498db;
+  border: 5px solid transparent;
+  transition: 0.2s ease;
+  border-radius: 50px;
+}
+.button-n:hover {
+  color: #3498db;
+  background-color: white;
+  transform: scale(1.1);
+  border: 5px solid #3498db;
+}
+
+.overtext {
+  max-width: 100%;
+  font-size: 1.5em;
+  font-weight: 600;
+  z-index: 4;
+  position: absolute;
+  margin: auto;
+  width: 100%;
+  background-color: #dbdbdb;
+  height: 3em;
+  bottom: 0px;
+}
+
+.btext {
+  text-align: center;
+  margin: auto 15px;
+}
+
+/*# sourceMappingURL=style.css.map */
