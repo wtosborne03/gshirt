@@ -37,7 +37,7 @@ function map() {
     });
     geo.on('result', function(results) {
         console.log(results);
-        eposition = results[0].geometry.coordinates;
+        eposition = results.geometry.coordinates;
         $('#go').show();
      })
     map.addControl(geo);
