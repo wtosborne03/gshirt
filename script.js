@@ -27,7 +27,7 @@ function map() {
     var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
-        center: [-79.4512, 43.6568],
+        center: [oposition.latitude, oposition.longitude],
         zoom: 13
     });
     geo = new MapboxGeocoder({
@@ -37,7 +37,8 @@ function map() {
     });
     geo.on('result', function(results) {
         console.log(results);
-        eposition = results[0].geometry.coordinates;
+        eposition = results.result.geometry.coordinates;
+        
         $('#go').show();
      })
     map.addControl(geo);
