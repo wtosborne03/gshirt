@@ -1,0 +1,112 @@
+.rgrid {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    padding:auto;
+    text-align: center;
+    }
+    
+    .g-top { grid-area: 1 / 1 / 2 / 4; }
+    .g-under { grid-area: 2 / 2 / 3 / 3; }
+    .g-bar { grid-area: 3 / 1 / 4 / 4; }
+    .g-left { grid-area: 4 / 1 / 5 / 2; }
+    .g-right { grid-area: 4 / 3 / 5 / 4; }
+    .bigtext {
+        text-align: center !important;
+        font-size: 2em;
+        margin: 0 auto;
+        display: inline; 
+        font-weight:700;
+    }
+    .bignumber {
+        text-align: center !important;
+        font-size: 4em;
+        margin: 0 auto;
+        display: inline; 
+        font-weight:700;
+    }
+    .bigbutton {
+        font-size: 2em;
+        width: 80%;
+        height:80%;
+        margin: auto 15px;
+        color: white;
+        background-color: #585858;
+        border: 5px solid transparent;
+        transition: .2s ease;
+        border-radius: 50px;
+        &:hover {
+            color: #585858;
+            background-color: white;
+            transform: scale(1.1);
+            border: 5px solid #585858;;
+        }
+    }
+    @keyframes animate-stripes {
+        0% {
+            background-position: 0 0;
+        }
+    
+        100% {
+            background-position: 60px 0;
+        }
+    }
+    
+    @keyframes auto-progress {
+      0% {
+        width: 0%;
+      }
+    
+      100% {
+        width: 100%;
+      }
+    }
+    
+    .progress-bar {
+        background-color: #1a1a1a;
+        height: 45px;
+        width: 90%;
+        margin: 50px auto;
+        border-radius: 5px;
+        box-shadow: 0 1px 5px #000 inset, 0 1px 0 #444;
+    }
+    
+    .stripes {
+        background-size: 30px 30px;
+        background-image: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, .15) 25%,
+            transparent 25%,
+            transparent 50%,
+            rgba(255, 255, 255, .15) 50%,
+            rgba(255, 255, 255, .15) 75%,
+            transparent 75%,
+            transparent
+        );
+    }
+    
+    .stripes.animated {
+      animation: animate-stripes 2s linear infinite;
+    }
+    
+    .stripes.animated.slower {
+      animation-duration: 1.25s;
+    }
+    
+    .stripes.reverse {
+      animation-direction: reverse;
+    }
+    
+    .progress-bar-inner {
+      display: block;
+      height: 45px;
+      width: 0%;
+      background-color: #34c2e3;
+      border-radius: 3px;
+      box-shadow: 0 1px 0 rgba(255, 255, 255, .5) inset;
+      position: relative;
+    }

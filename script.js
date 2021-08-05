@@ -1,50 +1,80 @@
 var options = {
-    enableHighAccuracy: true,
-    timeout: 5000,
+    enableHighAccuracy: false,
+    timeout: 1000,
     maximumAge: 0
-  };
+};
 var oposition;
 var eposition;
+var place = "";
+var time = 0;
+function sleep(ms) {
+    return new Promise(function (resolve) {
+        return setTimeout(resolve, ms);
+    });
+}
+
+function distance(lat1, lon1, lat2, lon2, unit) {
+    if (lat1 == lat2 && lon1 == lon2) {
+        return 0;
+    } else {
+        var radlat1 = Math.PI * lat1 / 180;
+        var radlat2 = Math.PI * lat2 / 180;
+        var theta = lon1 - lon2;
+        var radtheta = Math.PI * theta / 180;
+        var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+        if (dist > 1) {
+            dist = 1;
+        }
+        dist = Math.acos(dist);
+        dist = dist * 180 / Math.PI;
+        dist = dist * 60 * 1.1515;
+        if (unit == "K") {
+            dist = dist * 1.609344;
+        }
+        if (unit == "N") {
+            dist = dist * 0.8684;
+        }
+        return dist;
+    }
+}
+
+var main = document.querySelector('#topmost');
+ReactDOM.render(React.createElement(StartPage, null), main);
+var click = new Audio('sfx/click.mp3');
 
 function start() {
-    const soundEffect = new Audio('sound.wav');
+    var soundEffect = new Audio('sound.wav');
     soundEffect.play();
-    navigator.geolocation.getCurrentPosition(setupmap, error, options);
-    
+    navigator.geolocation.getCurrentPosition(setupmap, error);
 }
 function error(err) {
-    console.warn(`ERROR(${err.code}): ${err.message}`);
-  }
+    console.warn("ERROR(" + err.code + "): " + err.message);
+}
 function setupmap(position) {
     oposition = position.coords;
-    $('.main').html('<div class="overtext container mw-100"><div class="row"><div class="col btext">Choose Location</div><div class="col btext"><button id="go" class="button-n" onclick="go()">GO</button></div></div></div><div id="map"></div>');
-    $('#go').hide();
-    map();
+    click.play();
+    ReactDOM.render(React.createElement(LocationPage, null), main);
+}
+function relDiff(a, b) {
+    return 100 * Math.abs((a - b) / ((a + b) / 2));
 }
 
-function map() {
-    mapboxgl.accessToken = 'pk.eyJ1Ijoid3Rvc2Jvcm5lMDMiLCJhIjoiY2tna3F6ODF2MDdsMTJzbG4yNWs3dWJxaiJ9.902DiSI6jaX-O_f_seKSiQ';
-    var map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v11',
-        center: [oposition.longitude, oposition.latitude],
-        zoom: 13
-    });
-    geo = new MapboxGeocoder({
-        accessToken: mapboxgl.accessToken,
-        mapboxgl: mapboxgl
-        
-    });
-    geo.on('result', function(results) {
-        console.log(results);
-        eposition = results.result.geometry.coordinates;
-        
-        $('#go').show();
-     })
-    map.addControl(geo);
-}
 function go() {
-    rURL = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=' + oposition.latitude + ',' + oposition.longitude + '&destinations=' + eposition[1] + ',' + eposition[0] + '&key=AIzaSyC_-czyGuDPtTLXv8zioFztqAVe9zfAkHg';
-    fetch(rURL, {mode: 'cors'}).then(response => response.json()).then(data => console.log(data));
-    $('.main').html();
+    click.play();
+    var origin = new google.maps.LatLng(oposition.latitude, oposition.longitude);
+    var destination = new google.maps.LatLng(eposition[1], eposition[0]);
+
+    var service = new google.maps.DistanceMatrixService();
+    service.getDistanceMatrix({
+        origins: [origin],
+        destinations: [destination],
+        travelMode: 'DRIVING',
+        unitSystem: google.maps.UnitSystem.IMPERIAL,
+        avoidHighways: false,
+        avoidTolls: false
+    }, callback);
+}
+function callback(response, status) {
+    time = response.rows[0].elements[0].duration.value;
+    ReactDOM.render(React.createElement(OptionPage, null), main);
 }
