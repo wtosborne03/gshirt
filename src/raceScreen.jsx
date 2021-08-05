@@ -15,19 +15,19 @@ class RaceScreen extends React.Component {
       1000
     );
     this.geotrack();
-    var music = new Audio('sfx/music.mp3');
-    if (typeof music.loop == 'boolean')
+    click.src='sfx/music.mp3';
+    if (typeof click.loop == 'boolean')
         {
-            music.loop = true;
+            click.loop = true;
         }
         else
         {
-            music.addEventListener('ended', function() {
+            click.addEventListener('ended', function() {
                 this.currentTime = 0;
                 this.play();
             }, false);
         }
-    music.play();
+    click.play();
   }
   componentWillUnmount() {
     clearInterval(this.timerID);
@@ -43,11 +43,6 @@ class RaceScreen extends React.Component {
       dist = distance(crd.latitude, crd.longitude, target.latitude, target.longitude, "M");
       perc = relDiff(initdist, dist);
         this.setState({miles: dist, percentage: perc});
-      
-      if (target.latitude === crd.latitude && target.longitude === crd.longitude) {
-        console.log('Congratulations, you reached the target');
-        navigator.geolocation.clearWatch(id);
-      }
     }
     
     function error(err) {
