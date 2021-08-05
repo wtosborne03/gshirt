@@ -1,0 +1,9 @@
+{
+    "name": "Race Google Maps",
+    "short_name": "RGM",
+    "description": "Race the Google Maps Time Estimate",
+    "lang": "en-US",
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "#4d4d4d"
+  }
