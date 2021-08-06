@@ -7,6 +7,7 @@ var oposition;
 var eposition;
 var place="";
 var time=0;
+
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
@@ -36,6 +37,9 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 const main = document.querySelector('#topmost');
 ReactDOM.render(<StartPage/>, main);
 const click = new Audio('sfx/click.mp3');
+if (location.hash=="win") {
+    ReactDOM.render(<SuccessScreen/>, main);
+}
 
 function start() {
     const soundEffect = new Audio('sound.wav');
