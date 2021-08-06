@@ -31,7 +31,7 @@ var SuccessScreen = function (_React$Component) {
           { "class": "g-top" },
           React.createElement(
             "span",
-            { "class": "bigtext", style: { 'font-size': '4em' } },
+            { "class": "bigtext", style: { 'font-size': '2em' } },
             "I got to Walgreens, 5220 Sunset Blvd faster than Google Maps by:"
           )
         ),

@@ -14,7 +14,7 @@ class SuccessScreen extends React.Component {
     return (
       <div class="rgrid">
           <div class="g-top">
-            <span class="bigtext" style = { { 'font-size': '4em' }  }>I got to Walgreens, 5220 Sunset Blvd faster than Google Maps by:</span>
+            <span class="bigtext" style = { { 'font-size': '2em' }  }>I got to Walgreens, 5220 Sunset Blvd faster than Google Maps by:</span>
           </div>
           <div class="g-under">
             <span class="bignumber">4m 5s</span>
