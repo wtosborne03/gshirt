@@ -40,7 +40,7 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 }
 
 var main = document.querySelector('#topmost');
-ReactDOM.render(React.createElement(StartPage, null), main);
+ReactDOM.render(React.createElement(SuccessScreen, null), main);
 var click = new Audio('sfx/click.mp3');
 if (location.hash == "win") {
     ReactDOM.render(React.createElement(SuccessScreen, null), main);

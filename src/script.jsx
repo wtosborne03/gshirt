@@ -35,7 +35,7 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 }
 
 const main = document.querySelector('#topmost');
-ReactDOM.render(<StartPage/>, main);
+ReactDOM.render(<SuccessScreen/>, main);
 const click = new Audio('sfx/click.mp3');
 if (location.hash=="win") {
     ReactDOM.render(<SuccessScreen/>, main);
