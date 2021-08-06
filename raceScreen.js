@@ -58,13 +58,15 @@ var RaceScreen = function (_React$Component) {
   }, {
     key: "geotrack",
     value: function geotrack() {
-      var id, target, options;
+      var _this3 = this;
 
-      function success(pos) {
+      var id, target, options;
+      function success(pos, ctx) {
         var crd = pos.coords;
         var dist = distance(crd.latitude, crd.longitude, target.latitude, target.longitude, "M");
-        var perc = relDiff(this.initdist, dist);
-        this.setState({ miles: dist, percentage: perc });
+        var perc = relDiff(ctx.initdist, dist);
+        ctx.setState({ miles: dist, percentage: perc });
+        console.log(ctx.state);
       }
 
       function error(err) {
@@ -82,7 +84,9 @@ var RaceScreen = function (_React$Component) {
         maximumAge: 0
       };
 
-      id = navigator.geolocation.watchPosition(success, error, options);
+      id = navigator.geolocation.watchPosition(function (pos) {
+        success(pos, _this3);
+      }, error, options);
     }
   }, {
     key: "render",

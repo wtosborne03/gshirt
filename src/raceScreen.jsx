@@ -38,12 +38,12 @@ class RaceScreen extends React.Component {
   }
   geotrack() {
     var id, target, options;
-
-    function success(pos) {
+    function success(pos, ctx) {
       var crd = pos.coords;
       var dist = distance(crd.latitude, crd.longitude, target.latitude, target.longitude, "M");
-      var perc = relDiff(this.initdist, dist);
-        this.setState({miles: dist, percentage: perc});
+      var perc = relDiff(ctx.initdist, dist);
+        ctx.setState({miles: dist, percentage: perc});
+        console.log(ctx.state);
     }
     
     function error(err) {
@@ -61,7 +61,7 @@ class RaceScreen extends React.Component {
       maximumAge: 0
     };
     
-    id = navigator.geolocation.watchPosition(success, error, options);
+    id = navigator.geolocation.watchPosition((pos) => {success(pos, this)}, error, options);
   }
 
   render() {
