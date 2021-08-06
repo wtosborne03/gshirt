@@ -4,8 +4,9 @@ class RaceScreen extends React.Component {
   constructor(props) {
     super(props);
     this.destination = props.destination;
-    this.initdist = distance(oposition[0], oposition[1], eposition[1], eposition[0], "M");
-    this.state = {time: props.time, miles: 0, percentage: 0};
+    this.initdist = distance(oposition.latitude, oposition.longitude, eposition[1], eposition[0], "M");
+    console.log(this.initdist);
+    this.state = {time: props.time, miles: this.initdist, percentage: 0};
     //this.initdist = distance(crd.latitude, crd.longitude, target.latitude, target.longitude, "M");
     console.log(this.state);
   }
@@ -40,8 +41,8 @@ class RaceScreen extends React.Component {
 
     function success(pos) {
       var crd = pos.coords;
-      dist = distance(crd.latitude, crd.longitude, target.latitude, target.longitude, "M");
-      perc = relDiff(initdist, dist);
+      var dist = distance(crd.latitude, crd.longitude, target.latitude, target.longitude, "M");
+      var perc = relDiff(this.initdist, dist);
         this.setState({miles: dist, percentage: perc});
     }
     
