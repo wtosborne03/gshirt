@@ -134,7 +134,10 @@ var RaceScreen = function (_React$Component) {
             "label",
             null,
             Math.round(this.state.miles * 10) / 10,
-            " Miles Away"
+            " Miles Away ",
+            this.state.percentage,
+            "s ",
+            this.initdist
           )
         ),
         React.createElement("div", { "class": "g-left" })

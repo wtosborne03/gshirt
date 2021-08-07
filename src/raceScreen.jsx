@@ -82,7 +82,7 @@ class RaceScreen extends React.Component {
           <div class="progress-bar stripes animated reverse">
                 <span class="progress-bar-inner" style={ { width: `${ this.state.percentage }%` } }></span>
             </div>
-            <label>{Math.round(this.state.miles * 10) /10} Miles Away</label>
+            <label>{Math.round(this.state.miles * 10) /10} Miles Away {this.state.percentage}s {this.initdist}</label>
             </div>
           <div class="g-left">{/*
             <button class="bigbutton" onClick={() => ReactDOM.render(<LocationPage/>, main)}>
