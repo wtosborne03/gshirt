@@ -22,13 +22,13 @@ var SuccessScreen = function (_React$Component) {
   }
 
   _createClass(SuccessScreen, [{
-    key: 'componentDidMount',
+    key: "componentDidMount",
     value: function componentDidMount() {
-      $('p-time').text(this.time);
-      $('p-place1').text(this.place);
+      document.getElementById("svg1").contentDocument.getElementById('p-time').innerHTML = this.time;
+      document.getElementById("svg1").contentDocument.getElementById('p-place1').innerHTML = this.place;
     }
   }, {
-    key: 'save',
+    key: "save",
     value: function save() {
       var svg = document.getElementById("svg1").contentDocument.getElementById('loveit');
       console.log(svg);
@@ -57,38 +57,38 @@ var SuccessScreen = function (_React$Component) {
       };
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       var _this2 = this;
 
       return React.createElement(
-        'div',
-        { 'class': 'rgrid' },
+        "div",
+        { "class": "rgrid" },
         React.createElement(
-          'div',
-          { 'class': 'succpost' },
-          React.createElement('object', { type: 'image/svg+xml', data: 'poster.svg', id: 'svg1', 'class': 'succpost' })
+          "div",
+          { "class": "succpost" },
+          React.createElement("object", { type: "image/svg+xml", data: "poster.svg", id: "svg1", "class": "succpost" })
         ),
         React.createElement(
-          'div',
-          { 'class': 'g-left' },
+          "div",
+          { "class": "g-left" },
           React.createElement(
-            'button',
-            { 'class': 'bigbutton', onClick: function onClick() {
+            "button",
+            { "class": "bigbutton", onClick: function onClick() {
                 return ReactDOM.render(React.createElement(StartPage, null), main);
               } },
-            'Replay'
+            "Replay"
           )
         ),
         React.createElement(
-          'div',
-          { 'class': 'g-right' },
+          "div",
+          { "class": "g-right" },
           React.createElement(
-            'button',
-            { 'class': 'bigbutton', onClick: function onClick() {
+            "button",
+            { "class": "bigbutton", onClick: function onClick() {
                 return _this2.save();
               } },
-            'Share'
+            "Share"
           )
         )
       );

@@ -7,8 +7,8 @@ class SuccessScreen extends React.Component {
     this.time = props.time;
   }
   componentDidMount() {
-    $('p-time').text(this.time);
-    $('p-place1').text(this.place);
+    document.getElementById("svg1").contentDocument.getElementById('p-time').innerHTML = this.time;
+    document.getElementById("svg1").contentDocument.getElementById('p-place1').innerHTML = this.place;
 
   }
   save() {
