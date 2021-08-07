@@ -3,36 +3,56 @@
 class SuccessScreen extends React.Component {
   constructor(props) {
     super(props);
+    this.place = props.place;
+    this.time = props.time;
   }
   componentDidMount() {
+    $('p-time').text(this.time);
+    $('p-place1').text(this.place);
 
+  }
+  save() {
+    var svg = document.getElementById("svg1").contentDocument.getElementById('loveit');
+    console.log(svg);
+    var svgData = new XMLSerializer().serializeToString( svg );
 
+    var canvas = document.createElement( "canvas" );
+    var ctx = canvas.getContext( "2d" );
+    ctx.canvas.width  = window.innerWidth;
+     ctx.canvas.height = window.innerHeight;
+
+    var img = document.createElement( "img" );
+    img.setAttribute( "src", "data:image/svg+xml;base64," + btoa( svgData ) );
+
+    img.onload = function() {
+        ctx.drawImage( img, 0, 0 );
+        
+        // Now is done
+        var s=canvas.toDataURL( "image/png" );
+        var blob = dataURLtoBlob(s);
+        const file = new File([blob], 'fileName.png', { type: blob.type });
+        navigator.share({
+          title: 'Win',
+          text: 'Share your victory',
+          files: [file],
+        })
+    };
   }
 
 
   render() {
     return (
       <div class="rgrid">
-          <div class="g-top">
-            <span class="bigtext" style = { { 'font-size': '1em' }  }>I got to Walgreens, 5220 Sunset Blvd faster than Google Maps by:</span>
-          </div>
-          <div class="g-under">
-            <span class="bignumber">4m 5s</span>
-
-            
-          </div>
-          <div class="g-bar">
-          <img src="https://img.icons8.com/flat-round/64/000000/star--v1.png"/>
-          <img src="https://img.icons8.com/flat-round/64/000000/star--v1.png"/>
-          <img src="https://img.icons8.com/flat-round/64/000000/star--v1.png"/>
-          </div>
+        <div class="succpost">
+        <object type="image/svg+xml" data="poster.svg" id="svg1" class="succpost"></object>
+</div>
           <div class="g-left">
             <button class="bigbutton" onClick={() => ReactDOM.render(<StartPage/>, main)}>
                 Replay
           </button>
           </div>
           <div class="g-right">
-            <button class="bigbutton" onClick={() => navigator.share()}>
+            <button class="bigbutton" onClick={() => this.save()}>
                 Share
           </button>
           </div>

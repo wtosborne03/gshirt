@@ -14,63 +14,81 @@ var SuccessScreen = function (_React$Component) {
   function SuccessScreen(props) {
     _classCallCheck(this, SuccessScreen);
 
-    return _possibleConstructorReturn(this, (SuccessScreen.__proto__ || Object.getPrototypeOf(SuccessScreen)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (SuccessScreen.__proto__ || Object.getPrototypeOf(SuccessScreen)).call(this, props));
+
+    _this.place = props.place;
+    _this.time = props.time;
+    return _this;
   }
 
   _createClass(SuccessScreen, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {}
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      $('p-time').text(this.time);
+      $('p-place1').text(this.place);
+    }
   }, {
-    key: "render",
+    key: 'save',
+    value: function save() {
+      var svg = document.getElementById("svg1").contentDocument.getElementById('loveit');
+      console.log(svg);
+      var svgData = new XMLSerializer().serializeToString(svg);
+
+      var canvas = document.createElement("canvas");
+      var ctx = canvas.getContext("2d");
+      ctx.canvas.width = window.innerWidth;
+      ctx.canvas.height = window.innerHeight;
+
+      var img = document.createElement("img");
+      img.setAttribute("src", "data:image/svg+xml;base64," + btoa(svgData));
+
+      img.onload = function () {
+        ctx.drawImage(img, 0, 0);
+
+        // Now is done
+        var s = canvas.toDataURL("image/png");
+        var blob = dataURLtoBlob(s);
+        var file = new File([blob], 'fileName.png', { type: blob.type });
+        navigator.share({
+          title: 'Win',
+          text: 'Share your victory',
+          files: [file]
+        });
+      };
+    }
+  }, {
+    key: 'render',
     value: function render() {
+      var _this2 = this;
+
       return React.createElement(
-        "div",
-        { "class": "rgrid" },
+        'div',
+        { 'class': 'rgrid' },
         React.createElement(
-          "div",
-          { "class": "g-top" },
-          React.createElement(
-            "span",
-            { "class": "bigtext", style: { 'font-size': '1em' } },
-            "I got to Walgreens, 5220 Sunset Blvd faster than Google Maps by:"
-          )
+          'div',
+          { 'class': 'succpost' },
+          React.createElement('object', { type: 'image/svg+xml', data: 'poster.svg', id: 'svg1', 'class': 'succpost' })
         ),
         React.createElement(
-          "div",
-          { "class": "g-under" },
+          'div',
+          { 'class': 'g-left' },
           React.createElement(
-            "span",
-            { "class": "bignumber" },
-            "4m 5s"
-          )
-        ),
-        React.createElement(
-          "div",
-          { "class": "g-bar" },
-          React.createElement("img", { src: "https://img.icons8.com/flat-round/64/000000/star--v1.png" }),
-          React.createElement("img", { src: "https://img.icons8.com/flat-round/64/000000/star--v1.png" }),
-          React.createElement("img", { src: "https://img.icons8.com/flat-round/64/000000/star--v1.png" })
-        ),
-        React.createElement(
-          "div",
-          { "class": "g-left" },
-          React.createElement(
-            "button",
-            { "class": "bigbutton", onClick: function onClick() {
+            'button',
+            { 'class': 'bigbutton', onClick: function onClick() {
                 return ReactDOM.render(React.createElement(StartPage, null), main);
               } },
-            "Replay"
+            'Replay'
           )
         ),
         React.createElement(
-          "div",
-          { "class": "g-right" },
+          'div',
+          { 'class': 'g-right' },
           React.createElement(
-            "button",
-            { "class": "bigbutton", onClick: function onClick() {
-                return navigator.share();
+            'button',
+            { 'class': 'bigbutton', onClick: function onClick() {
+                return _this2.save();
               } },
-            "Share"
+            'Share'
           )
         )
       );

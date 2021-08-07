@@ -1,12 +1,26 @@
+
+
 var options = {
     enableHighAccuracy: false,
     timeout: 1000,
-    maximumAge: 0
+    maximumAge: 500
 };
 var oposition;
 var eposition;
 var place = "";
 var time = 0;
+
+function dataURLtoBlob(dataurl) {
+    var arr = dataurl.split(','),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+    while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new Blob([u8arr], { type: mime });
+}
 
 function sleep(ms) {
     return new Promise(function (resolve) {
@@ -40,16 +54,13 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 }
 
 var main = document.querySelector('#topmost');
-ReactDOM.render(React.createElement(SuccessScreen, null), main);
+ReactDOM.render(React.createElement(StartPage, null), main);
 var click = new Audio('sfx/click.mp3');
-if (location.hash == "win") {
-    ReactDOM.render(React.createElement(SuccessScreen, null), main);
-}
 
 function start() {
     var soundEffect = new Audio('sound.wav');
     soundEffect.play();
-    navigator.geolocation.getCurrentPosition(setupmap, error);
+    navigator.geolocation.getCurrentPosition(setupmap, error, options);
 }
 function error(err) {
     console.warn("ERROR(" + err.code + "): " + err.message);
@@ -59,9 +70,14 @@ function setupmap(position) {
     click.play();
     ReactDOM.render(React.createElement(LocationPage, null), main);
 }
-function relDiff(a, b) {
-    return 100 * Math.abs((a - b) / ((a + b) / 2));
-}
+var clamp = function clamp(a) {
+    var min = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+    var max = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
+    return Math.min(max, Math.max(min, a));
+};
+var invlerp = function invlerp(x, y, a) {
+    return clamp((a - x) / (y - x));
+};
 
 function go() {
     click.play();

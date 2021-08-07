@@ -37,23 +37,27 @@ var RaceScreen = function (_React$Component) {
       click.src = 'sfx/music.mp3';
       if (typeof click.loop == 'boolean') {
         click.loop = true;
-      } else {
-        click.addEventListener('ended', function () {
-          this.currentTime = 0;
-          this.play();
-        }, false);
       }
       click.play();
     }
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
+      click.loop = false;
+      click.pause();
+      click.currentTime = 0;
+      click.src = "sfx/click.mp3";
       clearInterval(this.timerID);
     }
   }, {
     key: "tick",
     value: function tick() {
       this.setState({ time: this.state.time -= 1 });
+    }
+  }, {
+    key: "win",
+    value: function win() {
+      ReactDOM.render(React.createElement(SuccessScreen, { place: this.destination, time: Math.floor(this.state.time / 60) + "m" + this.state.time - Math.floor(this.state.time / 60) * 60 + "s" }), main);
     }
   }, {
     key: "geotrack",
@@ -64,9 +68,12 @@ var RaceScreen = function (_React$Component) {
       function success(pos, ctx) {
         var crd = pos.coords;
         var dist = distance(crd.latitude, crd.longitude, target.latitude, target.longitude, "M");
-        var perc = relDiff(ctx.initdist, dist);
+        var perc = invlerp(initdist, 0, dist) * 100;
         ctx.setState({ miles: dist, percentage: perc });
         console.log(ctx.state);
+        if (perc / 100 > 0.99) {
+          ctx.win();
+        }
       }
 
       function error(err) {
@@ -79,9 +86,9 @@ var RaceScreen = function (_React$Component) {
       };
 
       options = {
-        enableHighAccuracy: false,
+        enableHighAccuracy: true,
         timeout: 5000,
-        maximumAge: 0
+        maximumAge: 200
       };
 
       id = navigator.geolocation.watchPosition(function (pos) {
@@ -126,7 +133,7 @@ var RaceScreen = function (_React$Component) {
           React.createElement(
             "label",
             null,
-            this.state.miles,
+            Math.round(this.state.miles * 10) / 10,
             " Miles Away"
           )
         ),

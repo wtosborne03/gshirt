@@ -1,12 +1,24 @@
+
+
 var options = {
     enableHighAccuracy: false,
     timeout: 1000,
-    maximumAge: 0
+    maximumAge: 500
   };
 var oposition;
 var eposition;
 var place="";
 var time=0;
+
+function dataURLtoBlob(dataurl) {
+    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+    while(n--){
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new Blob([u8arr], {type:mime});
+}
+
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -35,16 +47,13 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 }
 
 const main = document.querySelector('#topmost');
-ReactDOM.render(<SuccessScreen/>, main);
+ReactDOM.render(<StartPage/>, main);
 const click = new Audio('sfx/click.mp3');
-if (location.hash=="win") {
-    ReactDOM.render(<SuccessScreen/>, main);
-}
 
 function start() {
     const soundEffect = new Audio('sound.wav');
     soundEffect.play();
-    navigator.geolocation.getCurrentPosition(setupmap, error);
+    navigator.geolocation.getCurrentPosition(setupmap, error, options);
     
 }
 function error(err) {
@@ -56,9 +65,8 @@ function setupmap(position) {
     ReactDOM.render(<LocationPage/>, main);
    
 }
-function relDiff(a, b) {
-    return  100 * Math.abs( ( a - b ) / ( (a+b)/2 ) );
-   }
+const clamp = (a, min = 0, max = 1) => Math.min(max, Math.max(min, a));
+const invlerp = (x, y, a) => clamp((a - x) / (y - x));
 
 
 function go() {
