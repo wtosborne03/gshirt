@@ -2,11 +2,15 @@ var settings = {
     music: true,
     voice: true
 };
+var travel = {
+    location: {
+        latitude: 0,
+        longitude: 0
+    },
+    speed: 0,
+    speedlimit: 0
+}
 var speech = window.speechSynthesis;
-var recognition = new webkitSpeechRecognition();
-// set params
-recognition.continuous = true;
-recognition.interimResults = true;
 
 
 var options = {
@@ -70,7 +74,7 @@ function start() {
     const soundEffect = new Audio('sound.wav');
     soundEffect.play();
     navigator.geolocation.getCurrentPosition(setupmap, error, options);
-    recognition.start();
+
 }
 function error(err) {
     console.warn(`ERROR(${err.code}): ${err.message}`);

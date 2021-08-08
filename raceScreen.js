@@ -19,7 +19,7 @@ var RaceScreen = function (_React$Component) {
     _this.destination = props.destination;
     _this.initdist = distance(oposition.latitude, oposition.longitude, eposition[1], eposition[0], "M");
     console.log(_this.initdist);
-    _this.state = { time: props.time, miles: _this.initdist, percentage: 0 };
+    _this.state = { time: props.time, miles: _this.initdist, percentage: 0, speed: travel.speed };
     //this.initdist = distance(crd.latitude, crd.longitude, target.latitude, target.longitude, "M");
     console.log(_this.state);
     return _this;
@@ -33,7 +33,6 @@ var RaceScreen = function (_React$Component) {
       this.timerID = setInterval(function () {
         return _this2.tick();
       }, 1000);
-      this.trackspeech();
       this.geotrack();
       if (settings.music) {
         click.src = 'sfx/music.mp3';
@@ -42,9 +41,6 @@ var RaceScreen = function (_React$Component) {
         }
         click.play();
       }
-      setTimeout(function () {
-        speak('Welcome to Race Google Maps, I will be your host, Alex.');
-      }, 3000 + Math.random() * 7);
     }
   }, {
     key: "componentWillUnmount",
@@ -73,11 +69,13 @@ var RaceScreen = function (_React$Component) {
       var id, target, options;
       function success(pos, ctx) {
         var crd = pos.coords;
+        travel.location = pos.coords;
+        travel.speed = pos.coords.speed * 2.23694;
         var dist = distance(crd.latitude, crd.longitude, target.latitude, target.longitude, "M");
         var perc = 0 - dist * (100 / ctx.initdist) + 100;
-        ctx.setState({ miles: dist, percentage: perc });
+        ctx.setState({ miles: dist, percentage: perc, speed: travel.speed });
         console.log(ctx.state);
-        if (perc / 100 > 0.99) {
+        if (dist < 0.09) {
           ctx.win();
         }
       }
@@ -102,36 +100,12 @@ var RaceScreen = function (_React$Component) {
       }, error, options);
     }
   }, {
-    key: "trackspeech",
-    value: function trackspeech() {
-      recognition.onresult = function (event) {
-
-        // delve into words detected results & get the latest
-        // total results detected
-        var resultsLength = event.results.length - 1;
-        // get length of latest results
-        var ArrayLength = event.results[resultsLength].length - 1;
-        // get last word detected
-        if (event.results[resultsLength].isFinal) {
-          if (event.results[resultsLength][0].transcript.substring(0, 8) == "Hey Alex") {
-            speak('Yes?');
-          }
-        }
-        console.log(event.results[resultsLength]);
-      };
-
-      // speech error handling
-      recognition.onerror = function (event) {
-        console.log('error?');
-        console.log(event);
-      };
-    }
-  }, {
     key: "render",
     value: function render() {
       return React.createElement(
         "div",
         { "class": "rgrid" },
+        React.createElement(DriveBuddy, null),
         React.createElement(
           "div",
           { "class": "g g-top" },
@@ -153,6 +127,12 @@ var RaceScreen = function (_React$Component) {
         React.createElement(
           "div",
           { "class": "g g-bottom" },
+          React.createElement(
+            "span",
+            { "class": "bignumber" },
+            Math.round(this.state.speed),
+            " MPH"
+          ),
           React.createElement(
             "div",
             { "class": "progress-bar stripes animated reverse" },
