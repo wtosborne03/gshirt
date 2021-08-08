@@ -15,6 +15,7 @@ class RaceScreen extends React.Component {
       () => this.tick(),
       1000
     );
+    this.trackspeech();
     this.geotrack();
     if (settings.music) {
       click.src='sfx/music.mp3';
@@ -24,7 +25,12 @@ class RaceScreen extends React.Component {
           }
       click.play();
     }
+    setTimeout(() => {
+      speak('Welcome to Race Google Maps, I will be your host, Alex.')
+    }, 3000 + (Math.random() * 7));
   }
+  
+
   componentWillUnmount() {
     click.loop = false;
     click.pause();
@@ -67,6 +73,29 @@ class RaceScreen extends React.Component {
     };
     
     id = navigator.geolocation.watchPosition((pos) => {success(pos, this)}, error, options);
+  }
+  trackspeech() {
+    recognition.onresult = function(event){
+  
+      // delve into words detected results & get the latest
+      // total results detected
+      var resultsLength = event.results.length -1 ;
+      // get length of latest results
+      var ArrayLength = event.results[resultsLength].length -1;
+      // get last word detected
+      if(event.results[resultsLength].isFinal) {
+        if (event.results[resultsLength][0].transcript.substring(0,8) == "Hey Alex") {
+          speak('Yes?');
+        }
+      }
+      console.log(event.results[resultsLength]);
+    }
+    
+    // speech error handling
+    recognition.onerror = function(event){
+      console.log('error?');
+      console.log(event);
+    }
   }
 
   render() {

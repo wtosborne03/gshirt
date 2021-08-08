@@ -33,6 +33,7 @@ var RaceScreen = function (_React$Component) {
       this.timerID = setInterval(function () {
         return _this2.tick();
       }, 1000);
+      this.trackspeech();
       this.geotrack();
       if (settings.music) {
         click.src = 'sfx/music.mp3';
@@ -41,6 +42,9 @@ var RaceScreen = function (_React$Component) {
         }
         click.play();
       }
+      setTimeout(function () {
+        speak('Welcome to Race Google Maps, I will be your host, Alex.');
+      }, 3000 + Math.random() * 7);
     }
   }, {
     key: "componentWillUnmount",
@@ -96,6 +100,31 @@ var RaceScreen = function (_React$Component) {
       id = navigator.geolocation.watchPosition(function (pos) {
         success(pos, _this3);
       }, error, options);
+    }
+  }, {
+    key: "trackspeech",
+    value: function trackspeech() {
+      recognition.onresult = function (event) {
+
+        // delve into words detected results & get the latest
+        // total results detected
+        var resultsLength = event.results.length - 1;
+        // get length of latest results
+        var ArrayLength = event.results[resultsLength].length - 1;
+        // get last word detected
+        if (event.results[resultsLength].isFinal) {
+          if (event.results[resultsLength][0].transcript.substring(0, 8) == "Hey Alex") {
+            speak('Yes?');
+          }
+        }
+        console.log(event.results[resultsLength]);
+      };
+
+      // speech error handling
+      recognition.onerror = function (event) {
+        console.log('error?');
+        console.log(event);
+      };
     }
   }, {
     key: "render",

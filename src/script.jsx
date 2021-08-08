@@ -2,6 +2,12 @@ var settings = {
     music: true,
     voice: true
 };
+var speech = window.speechSynthesis;
+var recognition = new webkitSpeechRecognition();
+// set params
+recognition.continuous = true;
+recognition.interimResults = true;
+
 
 var options = {
     enableHighAccuracy: false,
@@ -52,12 +58,19 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 const main = document.querySelector('#topmost');
 ReactDOM.render(<StartPage/>, main);
 const click = new Audio('sfx/click.mp3');
-
+function speak(text) {
+    click.volume=0.2;
+    var talk =new SpeechSynthesisUtterance(text);
+    talk.onend = function() {click.volume=1.0;}
+    speech.speak(talk);
+    
+  }
 function start() {
+    
     const soundEffect = new Audio('sound.wav');
     soundEffect.play();
     navigator.geolocation.getCurrentPosition(setupmap, error, options);
-    
+    recognition.start();
 }
 function error(err) {
     console.warn(`ERROR(${err.code}): ${err.message}`);
