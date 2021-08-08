@@ -34,11 +34,13 @@ var RaceScreen = function (_React$Component) {
         return _this2.tick();
       }, 1000);
       this.geotrack();
-      click.src = 'sfx/music.mp3';
-      if (typeof click.loop == 'boolean') {
-        click.loop = true;
+      if (settings.music) {
+        click.src = 'sfx/music.mp3';
+        if (typeof click.loop == 'boolean') {
+          click.loop = true;
+        }
+        click.play();
       }
-      click.play();
     }
   }, {
     key: "componentWillUnmount",
@@ -103,16 +105,13 @@ var RaceScreen = function (_React$Component) {
         { "class": "rgrid" },
         React.createElement(
           "div",
-          { "class": "g-top" },
+          { "class": "g g-top" },
           React.createElement(
             "span",
             { "class": "bigtext" },
             this.destination
-          )
-        ),
-        React.createElement(
-          "div",
-          { "class": "g-under" },
+          ),
+          React.createElement("br", null),
           React.createElement(
             "span",
             { "class": "bignumber" },
@@ -124,7 +123,7 @@ var RaceScreen = function (_React$Component) {
         ),
         React.createElement(
           "div",
-          { "class": "g-bar" },
+          { "class": "g g-bottom" },
           React.createElement(
             "div",
             { "class": "progress-bar stripes animated reverse" },
@@ -134,13 +133,9 @@ var RaceScreen = function (_React$Component) {
             "label",
             null,
             Math.round(this.state.miles * 10) / 10,
-            " Miles Away ",
-            this.state.percentage,
-            "s ",
-            this.initdist
+            " Miles Away"
           )
-        ),
-        React.createElement("div", { "class": "g-left" })
+        )
       );
     }
   }]);

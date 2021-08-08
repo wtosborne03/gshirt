@@ -1,4 +1,7 @@
-
+var settings = {
+    music: true,
+    voice: true
+};
 
 var options = {
     enableHighAccuracy: false,

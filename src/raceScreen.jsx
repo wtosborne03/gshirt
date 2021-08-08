@@ -16,12 +16,14 @@ class RaceScreen extends React.Component {
       1000
     );
     this.geotrack();
-    click.src='sfx/music.mp3';
-    if (typeof click.loop == 'boolean')
-        {
-            click.loop = true;
-        }
-    click.play();
+    if (settings.music) {
+      click.src='sfx/music.mp3';
+      if (typeof click.loop == 'boolean')
+          {
+              click.loop = true;
+          }
+      click.play();
+    }
   }
   componentWillUnmount() {
     click.loop = false;
@@ -70,24 +72,15 @@ class RaceScreen extends React.Component {
   render() {
     return (
       <div class="rgrid">
-          <div class="g-top">
-            <span class="bigtext">{this.destination}</span>
-          </div>
-          <div class="g-under">
+          <div class="g g-top">
+            <span class="bigtext">{this.destination}</span><br/>
             <span class="bignumber">{Math.floor(this.state.time / 60)}m {this.state.time - Math.floor(this.state.time /60) * 60}s</span>
-
-            
           </div>
-          <div class="g-bar">
-          <div class="progress-bar stripes animated reverse">
+          <div class="g g-bottom">
+            <div class="progress-bar stripes animated reverse">
                 <span class="progress-bar-inner" style={ { width: `${ this.state.percentage }%` } }></span>
             </div>
-            <label>{Math.round(this.state.miles * 10) /10} Miles Away {this.state.percentage}s {this.initdist}</label>
-            </div>
-          <div class="g-left">{/*
-            <button class="bigbutton" onClick={() => ReactDOM.render(<LocationPage/>, main)}>
-                BACK
-          </button>*/}
+            <label>{Math.round(this.state.miles * 10) /10} Miles Away</label>
           </div>
       </div>
     );

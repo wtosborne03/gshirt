@@ -35,7 +35,7 @@ var LocationPage = function (_React$Component) {
             geo.on('result', function (results) {
                 console.log(results);
                 eposition = results.result.geometry.coordinates;
-                place = results.result.place_name;
+                place = results.result.text;
                 $('#go').show();
             });
             map.setStyle('mapbox://styles/mapbox/dark-v10');

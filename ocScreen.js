@@ -18,84 +18,69 @@ var OptionPage = function (_React$Component) {
   }
 
   _createClass(OptionPage, [{
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      settings.music = $('#music').is(":checked");
+      settings.voice = $('#voice').is(":checked");
+    }
+  }, {
     key: "render",
     value: function render() {
       return React.createElement(
         "div",
-        { "class": "container ", id: "p3" },
+        { "class": "rgrid" },
         React.createElement(
           "div",
-          { "class": "row scom" },
+          { "class": "g g-top" },
           React.createElement(
-            "div",
-            { "class": "col" },
-            React.createElement(
-              "span",
-              { id: "dest" },
-              "Destination: "
-            )
+            "span",
+            { "class": "bigtext" },
+            place,
+            React.createElement("br", null),
+            " ETA: ",
+            Math.floor(time / 60),
+            "m ",
+            time - Math.floor(time / 60) * 60,
+            "s"
           ),
           React.createElement(
             "div",
-            { "class": "col" },
+            { "class": "formbox" },
+            React.createElement("input", { "class": "form-check-input", type: "checkbox", value: "", id: "music", defaultChecked: true }),
             React.createElement(
-              "span",
-              { id: "eta" },
-              "45 minutes "
-            )
-          )
-        ),
-        React.createElement(
-          "div",
-          { "class": "row scom" },
-          React.createElement(
-            "div",
-            { "class": "col" },
-            React.createElement(
-              "div",
-              { "class": "form-check form-switch" },
-              React.createElement("input", {
-                "class": "form-check-input",
-                type: "checkbox",
-                id: "flexSwitchCheckChecked",
-                checked: true
-              }),
-              React.createElement(
-                "label",
-                { "class": "form-check-label", "for": "flexSwitchCheckChecked" },
-                "Music"
-              )
-            )
-          )
-        ),
-        React.createElement(
-          "div",
-          { "class": "overtext container mw-100" },
-          React.createElement(
-            "div",
-            { "class": "row" },
-            React.createElement(
-              "div",
-              { "class": "col btext" },
-              React.createElement(
-                "button",
-                { id: "begin", "class": "button-n", onClick: function onClick() {
-                    click.play();ReactDOM.render(React.createElement(LocationPage, null), main);
-                  } },
-                "BACK"
-              )
+              "label",
+              { "class": "form-check-label", "for": "music" },
+              "Background Music"
             ),
+            React.createElement("br", null),
+            React.createElement("input", { "class": "form-check-input", type: "checkbox", value: "", id: "voice", defaultChecked: true }),
             React.createElement(
-              "div",
-              { "class": "col btext" },
-              React.createElement(
-                "button",
-                { id: "begin", "class": "button-n", onClick: function onClick() {
-                    click.play();ReactDOM.render(React.createElement(CountdownPage, null), main);
-                  } },
-                "GO"
-              )
+              "label",
+              { "class": "form-check-label", "for": "voice" },
+              "Voice Assistant"
             )
+          )
+        ),
+        React.createElement(
+          "div",
+          { "class": "g g-left" },
+          React.createElement(
+            "button",
+            { "class": "bigbutton", onClick: function onClick() {
+                click.play();ReactDOM.render(React.createElement(LocationPage, null), main);
+              } },
+            "BACK"
+          )
+        ),
+        React.createElement(
+          "div",
+          { "class": "g g-right" },
+          React.createElement(
+            "button",
+            { "class": "bigbutton", onClick: function onClick() {
+                click.play();ReactDOM.render(React.createElement(CountdownPage, null), main);
+              } },
+            "GO"
           )
         )
       );
