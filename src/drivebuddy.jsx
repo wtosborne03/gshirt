@@ -12,7 +12,7 @@ class DriveBuddy extends React.Component {
       3000
     );
     setTimeout(() => {
-        speak('Welcome to Race Google Maps, I will be your host, ' + this.name + '.');
+        speak('Welcome to Race Google Maps, I will be your host, ' + this.name + '. I must say, you are looking submissive and breedable this evening.');
       }, 3000 + (Math.random() * 7));
     setTimeout(() => {
         this.speedcoin();
@@ -41,7 +41,7 @@ class DriveBuddy extends React.Component {
       }, 14000);
       setTimeout(() => {
         this.speedcoin();
-      }, 30000 + (Math.random() * 7));
+      }, 80000 + (Math.random() * 7));
   }
   
   getmaxspeed() {

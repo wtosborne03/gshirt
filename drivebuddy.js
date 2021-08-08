@@ -30,7 +30,7 @@ var DriveBuddy = function (_React$Component) {
         return _this2.tick();
       }, 3000);
       setTimeout(function () {
-        speak('Welcome to Race Google Maps, I will be your host, ' + _this2.name + '.');
+        speak('Welcome to Race Google Maps, I will be your host, ' + _this2.name + '. I must say, you are looking submissive and breedable this evening.');
       }, 3000 + Math.random() * 7);
       setTimeout(function () {
         _this2.speedcoin();
@@ -63,7 +63,7 @@ var DriveBuddy = function (_React$Component) {
       }, 14000);
       setTimeout(function () {
         _this3.speedcoin();
-      }, 30000 + Math.random() * 7);
+      }, 80000 + Math.random() * 7);
     }
   }, {
     key: "getmaxspeed",
