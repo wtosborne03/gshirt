@@ -10,8 +10,6 @@ var travel = {
     speed: 0,
     speedlimit: 0
 }
-var speech = window.speechSynthesis;
-
 
 var options = {
     enableHighAccuracy: false,
@@ -64,13 +62,11 @@ ReactDOM.render(<StartPage/>, main);
 const click = new Audio('sfx/click.mp3');
 function speak(text) {
     click.volume=0.2;
-    var talk =new SpeechSynthesisUtterance(text);
-    talk.onend = function() {click.volume=1.0;}
-    speech.speak(talk);
+    responsiveVoice.speak(text, "UK English Male", {onend: function() {click.volume=1.0;}});
     
   }
 function start() {
-    
+    responsiveVoice.speak('');
     const soundEffect = new Audio('sound.wav');
     soundEffect.play();
     navigator.geolocation.getCurrentPosition(setupmap, error, options);
