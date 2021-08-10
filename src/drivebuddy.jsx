@@ -18,18 +18,19 @@ class DriveBuddy extends React.Component {
     this.remarks = [
       'I am a dog, I like to run, I like to run fast',
       'I love the Olympics',
-      'I like to run',
-      'I like to run fast and run slow',
       'I will get you to your destination.',
       'I love driving off the beaten path.',
-      'The world is beautiful.'
+      'The world is beautiful.',
+      'Remember that somebody loves you.',
     ];
     this.sorry = [
       "Sorry, you weren't fast enough.",
       "Looks like you were too slow.",
       "I don't think you were fast enough.",
       "You didn't make the cut.",
-      "Wow, were being really cautious today, huh?"
+      "Wow, were being really cautious today, huh?",
+      "Better luck next time.",
+      
     ];
   }
   componentDidMount() {
@@ -39,8 +40,7 @@ class DriveBuddy extends React.Component {
     );
     setTimeout(() => {
         speak(this.greetings[Math.floor(Math.random()*this.greetings.length)] +
-         ', Welcome to Race Google Maps, I will be your host, ' + this.name +
-          '. ' + this.remarks[Math.floor(Math.random()*this.remarks.length)]);
+         ', Welcome to Race Google Maps.' + this.remarks[Math.floor(Math.random()*this.remarks.length)]);
       }, 3000 + (Math.random() * 7));
     setTimeout(() => {
         this.speedcoin();

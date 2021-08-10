@@ -19,8 +19,8 @@ var DriveBuddy = function (_React$Component) {
     _this.name = "Christopher Weston Chandler";
     _this.state = { coins: 0 };
     _this.greetings = ['Hello', 'Hi', 'Hiya', 'Hey', 'What\'s up', 'Howdy', 'Hey there', 'Howdy-do'];
-    _this.remarks = ['I am a dog, I like to run, I like to run fast', 'I love the Olympics', 'I like to run', 'I like to run fast and run slow', 'I will get you to your destination.', 'I love driving off the beaten path.', 'The world is beautiful.'];
-    _this.sorry = ["Sorry, you weren't fast enough.", "Looks like you were too slow.", "I don't think you were fast enough.", "You didn't make the cut.", "Wow, were being really cautious today, huh?"];
+    _this.remarks = ['I am a dog, I like to run, I like to run fast', 'I love the Olympics', 'I will get you to your destination.', 'I love driving off the beaten path.', 'The world is beautiful.', 'Remember that somebody loves you.'];
+    _this.sorry = ["Sorry, you weren't fast enough.", "Looks like you were too slow.", "I don't think you were fast enough.", "You didn't make the cut.", "Wow, were being really cautious today, huh?", "Better luck next time."];
     return _this;
   }
 
@@ -33,7 +33,7 @@ var DriveBuddy = function (_React$Component) {
         return _this2.tick();
       }, 3000);
       setTimeout(function () {
-        speak(_this2.greetings[Math.floor(Math.random() * _this2.greetings.length)] + ', Welcome to Race Google Maps, I will be your host, ' + _this2.name + '. ' + _this2.remarks[Math.floor(Math.random() * _this2.remarks.length)]);
+        speak(_this2.greetings[Math.floor(Math.random() * _this2.greetings.length)] + ', Welcome to Race Google Maps.' + _this2.remarks[Math.floor(Math.random() * _this2.remarks.length)]);
       }, 3000 + Math.random() * 7);
       setTimeout(function () {
         _this2.speedcoin();

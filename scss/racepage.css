@@ -157,4 +157,14 @@
   z-index: -4;
 }
 
+.bottomtext {
+  position: absolute;
+  bottom: 0;
+  font-size: 16px;
+  text-align: center;
+  left: 0;
+  right: 0;
+  color: #585858;
+}
+
 /*# sourceMappingURL=racepage.css.map */

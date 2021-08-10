@@ -9,35 +9,40 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var StartPage = function (_React$Component) {
-  _inherits(StartPage, _React$Component);
+    _inherits(StartPage, _React$Component);
 
-  function StartPage(props) {
-    _classCallCheck(this, StartPage);
+    function StartPage(props) {
+        _classCallCheck(this, StartPage);
 
-    return _possibleConstructorReturn(this, (StartPage.__proto__ || Object.getPrototypeOf(StartPage)).call(this, props));
-  }
-
-  _createClass(StartPage, [{
-    key: "render",
-    value: function render() {
-
-      return React.createElement(
-        "div",
-        { "class": "startpage" },
-        React.createElement(
-          "div",
-          { "class": "start-button" },
-          React.createElement(
-            "button",
-            { className: "button1", onClick: function onClick() {
-                return start();
-              } },
-            "START"
-          )
-        )
-      );
+        return _possibleConstructorReturn(this, (StartPage.__proto__ || Object.getPrototypeOf(StartPage)).call(this, props));
     }
-  }]);
 
-  return StartPage;
+    _createClass(StartPage, [{
+        key: "render",
+        value: function render() {
+
+            return React.createElement(
+                "div",
+                { "class": "startpage" },
+                React.createElement(
+                    "div",
+                    { "class": "start-button" },
+                    React.createElement(
+                        "button",
+                        { className: "button1", onClick: function onClick() {
+                                return start();
+                            } },
+                        "START"
+                    )
+                ),
+                React.createElement(
+                    "div",
+                    { "class": "bottomtext" },
+                    "I am not responsible for any inherent injuries caused by using this software. I am not responsible for loss of life or damage to property."
+                )
+            );
+        }
+    }]);
+
+    return StartPage;
 }(React.Component);
