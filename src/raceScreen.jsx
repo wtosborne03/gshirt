@@ -50,7 +50,9 @@ class RaceScreen extends React.Component {
     function success(pos, ctx) {
       var crd = pos.coords;
       travel.location = pos.coords;
-      travel.speed = pos.coords.speed * 2.23694;
+      if (pos.coords.speed != null) {
+        travel.speed = pos.coords.speed * 2.23694;
+      }
       var dist = distance(crd.latitude, crd.longitude, target.latitude, target.longitude, "M");
       var perc = (0 - (dist * (100 / ctx.initdist))) + 100;
         ctx.setState({miles: dist, percentage: perc, speed: travel.speed});
