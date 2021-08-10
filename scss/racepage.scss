@@ -77,6 +77,14 @@
         border-radius: 5px;
         box-shadow: 0 1px 5px #000 inset, 0 1px 0 #444;
     }
+    .com-bar {
+      height: 8px !important;
+      z-index: -4;
+    }
+    .ptext {
+      margin-top:6px;
+      font-size: 20px;
+    }
     
     .stripes {
         background-size: 30px 30px;
@@ -120,6 +128,9 @@
       border-radius: 3px;
       box-shadow: 0 1px 0 rgba(255, 255, 255, .5) inset;
       position: relative;
+    }
+    .com-inner {
+      background-color: #e36634;
     }
 
 .succpost {

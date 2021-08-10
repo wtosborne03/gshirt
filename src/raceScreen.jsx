@@ -6,7 +6,7 @@ class RaceScreen extends React.Component {
     this.destination = props.destination;
     this.initdist = distance(oposition.latitude, oposition.longitude, eposition[1], eposition[0], "M");
     console.log(this.initdist);
-    this.state = {time: props.time, miles: this.initdist, percentage: 0, speed: travel.speed};
+    this.state = {time: props.time, miles: this.initdist, percentage: 0, speed: travel.speed, progress: 0};
     this.db = React.createRef();
     //this.initdist = distance(crd.latitude, crd.longitude, target.latitude, target.longitude, "M");
     console.log(this.state);
@@ -36,7 +36,11 @@ class RaceScreen extends React.Component {
     clearInterval(this.timerID);
   }
   tick() {
+    this.setState({progress: this.state.progress + (100/time)});
     this.setState({time: this.state.time -= 1});
+    if (this.state.time <= 0) {
+      ReactDOM.render(<LoseScreen/>, main);
+    }
   }
   win() {
     ReactDOM.render(<SuccessScreen coins={this.db.state.coins} place={this.destination} time={Math.floor(this.state.time / 60) + "m" + this.state.time - Math.floor(this.state.time /60) * 60 + "s"} />, main)
@@ -85,7 +89,10 @@ class RaceScreen extends React.Component {
           </div>
           <div class="g g-bottom">
             <span class="bignumber">{Math.round(this.state.speed)} MPH</span>
-            <div class="progress-bar stripes animated reverse">
+            <div class="progress-bar com-bar stripes animated reverse">
+                <span class="progress-bar-inner com-inner" style={ { width: `${ this.state.progress }%` } }></span>
+            </div>
+            <div class="progress-bar stripes animated reverse"><span class="ptext">Progress</span>
                 <span class="progress-bar-inner" style={ { width: `${ this.state.percentage }%` } }></span>
 
             </div>

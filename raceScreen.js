@@ -19,7 +19,7 @@ var RaceScreen = function (_React$Component) {
     _this.destination = props.destination;
     _this.initdist = distance(oposition.latitude, oposition.longitude, eposition[1], eposition[0], "M");
     console.log(_this.initdist);
-    _this.state = { time: props.time, miles: _this.initdist, percentage: 0, speed: travel.speed };
+    _this.state = { time: props.time, miles: _this.initdist, percentage: 0, speed: travel.speed, progress: 0 };
     _this.db = React.createRef();
     //this.initdist = distance(crd.latitude, crd.longitude, target.latitude, target.longitude, "M");
     console.log(_this.state);
@@ -55,7 +55,11 @@ var RaceScreen = function (_React$Component) {
   }, {
     key: "tick",
     value: function tick() {
+      this.setState({ progress: this.state.progress + 100 / time });
       this.setState({ time: this.state.time -= 1 });
+      if (this.state.time <= 0) {
+        ReactDOM.render(React.createElement(LoseScreen, null), main);
+      }
     }
   }, {
     key: "win",
@@ -136,7 +140,17 @@ var RaceScreen = function (_React$Component) {
           ),
           React.createElement(
             "div",
+            { "class": "progress-bar com-bar stripes animated reverse" },
+            React.createElement("span", { "class": "progress-bar-inner com-inner", style: { width: this.state.progress + "%" } })
+          ),
+          React.createElement(
+            "div",
             { "class": "progress-bar stripes animated reverse" },
+            React.createElement(
+              "span",
+              { "class": "ptext" },
+              "Progress"
+            ),
             React.createElement("span", { "class": "progress-bar-inner", style: { width: this.state.percentage + "%" } })
           ),
           React.createElement(

@@ -1,3 +1,5 @@
+
+var noSleep = new NoSleep();
 var settings = {
     music: true,
     voice: true
@@ -80,6 +82,7 @@ function speak(text) {
         } });
 }
 function start() {
+    noSleep.enable();
     responsiveVoice.speak('');
     var soundEffect = new Audio('sound.wav');
     soundEffect.play();
