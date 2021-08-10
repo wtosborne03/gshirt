@@ -20,6 +20,7 @@ var RaceScreen = function (_React$Component) {
     _this.initdist = distance(oposition.latitude, oposition.longitude, eposition[1], eposition[0], "M");
     console.log(_this.initdist);
     _this.state = { time: props.time, miles: _this.initdist, percentage: 0, speed: travel.speed };
+    _this.db = React.createRef();
     //this.initdist = distance(crd.latitude, crd.longitude, target.latitude, target.longitude, "M");
     console.log(_this.state);
     return _this;
@@ -59,7 +60,7 @@ var RaceScreen = function (_React$Component) {
   }, {
     key: "win",
     value: function win() {
-      ReactDOM.render(React.createElement(SuccessScreen, { place: this.destination, time: Math.floor(this.state.time / 60) + "m" + this.state.time - Math.floor(this.state.time / 60) * 60 + "s" }), main);
+      ReactDOM.render(React.createElement(SuccessScreen, { coins: this.db.state.coins, place: this.destination, time: Math.floor(this.state.time / 60) + "m" + this.state.time - Math.floor(this.state.time / 60) * 60 + "s" }), main);
     }
   }, {
     key: "geotrack",
@@ -105,7 +106,7 @@ var RaceScreen = function (_React$Component) {
       return React.createElement(
         "div",
         { "class": "rgrid" },
-        React.createElement(DriveBuddy, null),
+        React.createElement(DriveBuddy, { ref: this.db }),
         React.createElement(
           "div",
           { "class": "g g-top" },

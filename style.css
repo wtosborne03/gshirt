@@ -237,4 +237,20 @@ html, body {
   z-index: -4;
 }
 
+.db-header {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  background: #313131;
+  color: #f5f516;
+  font-size: 65px;
+  text-align: center;
+  font-weight: 900;
+  position: absolute;
+  left: 15px;
+  top: 45%;
+  margin: 10px auto;
+  display: block;
+}
+
 /*# sourceMappingURL=style.css.map */

@@ -17,7 +17,10 @@ var DriveBuddy = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (DriveBuddy.__proto__ || Object.getPrototypeOf(DriveBuddy)).call(this, props));
 
     _this.name = "Christopher Weston Chandler";
-    _this.coins = 0;
+    _this.state = { coins: 0 };
+    _this.greetings = ['Hello', 'Hi', 'Hiya', 'Hey', 'What\'s up', 'Howdy', 'Hey there', 'Howdy-do'];
+    _this.remarks = ['I am a dog, I like to run, I like to run fast', 'I love the Olympics', 'I like to run', 'I like to run fast and run slow', 'I will get you to your destination.', 'I love driving off the beaten path.', 'The world is beautiful.'];
+    _this.sorry = ["Sorry, you weren't fast enough.", "Looks like you were too slow.", "I don't think you were fast enough.", "You didn't make the cut.", "Wow, were being really cautious today, huh?"];
     return _this;
   }
 
@@ -30,7 +33,7 @@ var DriveBuddy = function (_React$Component) {
         return _this2.tick();
       }, 3000);
       setTimeout(function () {
-        speak('Welcome to Race Google Maps, I will be your host, ' + _this2.name + '. I must say, you are looking submissive and breedable this evening.');
+        speak(_this2.greetings[Math.floor(Math.random() * _this2.greetings.length)] + ', Welcome to Race Google Maps, I will be your host, ' + _this2.name + '. ' + _this2.remarks[Math.floor(Math.random() * _this2.remarks.length)]);
       }, 3000 + Math.random() * 7);
       setTimeout(function () {
         _this2.speedcoin();
@@ -50,15 +53,15 @@ var DriveBuddy = function (_React$Component) {
       var _this3 = this;
 
       var initspeed = travel.speed;
-      var speedchange = 15;
-      var coins = 3;
-      speak('Speed up ' + speedchange + ' miles an hour in 10 seconds to collect ' + coins + ' speedcoins');
+      var speedchange = getRandomInt(8, 17);
+      var coins = getRandomInt(2, 6);
+      speak('Speed up to ' + (initspeed + speedchange) + ' miles an hour in 10 seconds to collect ' + coins + ' speedcoins');
       setTimeout(function () {
         if (travel.speed >= initspeed + speedchange - 1) {
-          _this3.coins += coins;
-          speak('Good Job! You now have ' + _this3.coins + ' speedcoins');
+          _this3.setState({ coins: _this3.state.coins + coins });
+          speak('Good Job! You now have ' + _this3.state.coins + ' speedcoins');
         } else {
-          speak('I guess you did not want to go ' + (initspeed + speedchange) + ' miles an hour there');
+          speak(_this3.sorry[Math.floor(Math.random() * _this3.sorry.length)]);
         }
       }, 14000);
       setTimeout(function () {
@@ -82,7 +85,15 @@ var DriveBuddy = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return React.createElement("div", { id: "db" });
+      return React.createElement(
+        "div",
+        { id: "db" },
+        React.createElement(
+          "div",
+          { "class": "db-header" },
+          this.state.coins
+        )
+      );
     }
   }]);
 

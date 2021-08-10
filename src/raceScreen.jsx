@@ -7,6 +7,7 @@ class RaceScreen extends React.Component {
     this.initdist = distance(oposition.latitude, oposition.longitude, eposition[1], eposition[0], "M");
     console.log(this.initdist);
     this.state = {time: props.time, miles: this.initdist, percentage: 0, speed: travel.speed};
+    this.db = React.createRef();
     //this.initdist = distance(crd.latitude, crd.longitude, target.latitude, target.longitude, "M");
     console.log(this.state);
   }
@@ -38,7 +39,7 @@ class RaceScreen extends React.Component {
     this.setState({time: this.state.time -= 1});
   }
   win() {
-    ReactDOM.render(<SuccessScreen place={this.destination} time={Math.floor(this.state.time / 60) + "m" + this.state.time - Math.floor(this.state.time /60) * 60 + "s"} />, main)
+    ReactDOM.render(<SuccessScreen coins={this.db.state.coins} place={this.destination} time={Math.floor(this.state.time / 60) + "m" + this.state.time - Math.floor(this.state.time /60) * 60 + "s"} />, main)
   }
   geotrack() {
     var id, target, options;
@@ -77,7 +78,7 @@ class RaceScreen extends React.Component {
   render() {
     return (
       <div class="rgrid">
-        <DriveBuddy />
+        <DriveBuddy ref={this.db}/>
           <div class="g g-top">
             <span class="bigtext">{this.destination}</span><br/>
             <span class="bignumber">{Math.floor(this.state.time / 60)}m {this.state.time - Math.floor(this.state.time /60) * 60}s</span>
