@@ -74,7 +74,7 @@ function speak(text) {
     
   }
 function start() {
-    noSleep.enable();
+    $('#bug')[0].play();
     responsiveVoice.speak('');
     const soundEffect = new Audio('sound.wav');
     soundEffect.play();

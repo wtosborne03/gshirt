@@ -53,9 +53,9 @@ var DriveBuddy = function (_React$Component) {
       var _this3 = this;
 
       var initspeed = travel.speed;
-      var speedchange = getRandomInt(8, 17);
+      var speedchange = getRandomInt(7, 16);
       var coins = getRandomInt(2, 6);
-      speak('Speed up to ' + (initspeed + speedchange) + ' miles an hour in 10 seconds to collect ' + coins + ' speedcoins');
+      speak('Speed up to ' + (Math.round(initspeed + speedchange) + 1) + ' miles an hour in 10 seconds to collect ' + coins + ' speedcoins');
       setTimeout(function () {
         if (travel.speed >= initspeed + speedchange - 1) {
           _this3.setState({ coins: _this3.state.coins + coins });

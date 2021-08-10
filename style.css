@@ -203,6 +203,7 @@ html, body {
 .ptext {
   margin-top: 6px;
   font-size: 20px;
+  position: absolute;
 }
 
 .stripes {
